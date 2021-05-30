@@ -1,0 +1,1 @@
+export { InstitutionModel } from "./InstitutionModel"
