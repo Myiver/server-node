@@ -3,11 +3,7 @@ import dotenv from "dotenv"
 
 dotenv.config()
 
-export const auth = (req, res, next) => {
-	if (req.method === "OPTIONS") {
-		return next()
-	}
-
+export const verifyToken = (req, res, next) => {
 	if (req.headers["authorization"]) {
 		try {
 			const token = req.headers["authorization"].split(" ")[1]
@@ -23,7 +19,7 @@ export const auth = (req, res, next) => {
 
 				req.institution = decoded
 
-				next()
+				return next()
 			})
 
 

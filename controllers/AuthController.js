@@ -14,7 +14,12 @@ class AuthController {
       const lowerLogin = login.toLowerCase()
       const hashedPassword = hashSync(password)
 
-      const newInstitution = new InstitutionModel({ name, login: lowerLogin, password: hashedPassword })
+      // Create a new institution
+      const newInstitution = new InstitutionModel({
+        name,
+        login: lowerLogin,
+        password: hashedPassword
+      })
       const savedInstitution = await newInstitution.save()
 
       // Remove password and __v fields from the response object
@@ -33,23 +38,26 @@ class AuthController {
       const { login, password } = req.body
       const lowerLogin = login.toLowerCase()
 
-      const institution = await InstitutionModel.findOne({ login: lowerLogin }).select({ __v: 0 })
+      const institution = await InstitutionModel.findOne({ login: lowerLogin })
 
-      if (!institution) {
+      if (institution === null) {
         return res.json({ error: "Սխալ մուտքանուն կամ գաղտնաբառ" })
       }
 
       // If institution is found => check password
       const passwordsAreMatch = compareSync(password, institution.password)
 
-      if (!passwordsAreMatch) {
+      if (passwordsAreMatch === false) {
         return res.json({ error: "Սխալ մուտքանուն կամ գաղտնաբառ" })
       }
 
-      // Remove password field from response object
+      // Remove password and __v fields from response object
       institution.password = undefined
+      institution.__V = undefined
 
-      const token = jwt.sign({ _id: institution._id }, process.env.JWT_SECRET, { expiresIn: "60 days" })
+      const token = jwt.sign({ _id: institution._id }, process.env.JWT_SECRET, {
+        expiresIn: "30 days"
+      })
 
       return res.json({ institution, token })
     } catch ({ message }) {
@@ -58,19 +66,21 @@ class AuthController {
   }
 
   /* Verify token */
-  static async verifyToken(req, res) {
+  static async getVerifiedInstitution(req, res) {
     try {
-      const institution = await InstitutionModel.findOne({ _id: req.institution._id }).select({ __v: 0 })
-      const token = jwt.sign({ _id: institution._id }, process.env.JWT_SECRET, { expiresIn: "60 days" })
+      const institution = await InstitutionModel.findOne({ _id: req.institution._id })
+      const token = jwt.sign({ _id: institution._id }, process.env.JWT_SECRET, {
+        expiresIn: "30 days"
+      })
 
-      // Remove password field from response object
+      // Remove password and __v fields from response object
       institution.password = undefined
+      institution.__v = undefined
 
       return res.json({ institution, token })
     } catch ({ message }) {
       return res.json({ error: message })
     }
-
   }
 }
 

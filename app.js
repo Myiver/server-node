@@ -21,7 +21,7 @@ const start = async () => {
       useUnifiedTopology: true
     })
 
-    console.log("Connected to database..!");
+    console.log("Connected to database..!")
   } catch ({ message }) {
     console.log("Database connecting error: ", message)
   }

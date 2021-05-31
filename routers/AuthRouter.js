@@ -1,7 +1,7 @@
 import express from "express"
 
 import { AuthController } from "../controllers"
-import { checkLoginUnique, auth } from "../middlewares"
+import { checkLoginUnique, verifyToken } from "../middlewares"
 
 const router = express.Router()
 
@@ -12,6 +12,6 @@ router.post("/register", checkLoginUnique, AuthController.register)
 router.post("/login", AuthController.login)
 
 /* POST auth */
-router.get("/verify", auth, AuthController.verifyToken)
+router.get("/verifyToken", verifyToken, AuthController.getVerifiedInstitution)
 
 export { router }

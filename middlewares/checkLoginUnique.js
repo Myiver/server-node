@@ -11,9 +11,9 @@ const checkLoginUnique = async (req, res, next) => {
       return res.json({ error: `"${login}" մուտքանունն արդեն զբաղված է` })
     }
 
-    next()
+    return next()
   } catch ({ message }) {
-    res.json({ error: message })
+    return res.json({ error: message })
   }
 }
 
