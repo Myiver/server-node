@@ -1,9 +1,18 @@
 import { Schema, model } from "mongoose"
 
 const InstitutionSchema = new Schema({
-  name: String,
-  login: String,
-  password: String
+  name: {
+  	type: String,
+  	required: true
+  },
+  login: {
+  	type: String,
+  	required: true
+  },
+  password: {
+  	type: String,
+  	required: true
+  }
 })
 
 const InstitutionModel = model("institutions", InstitutionSchema)
