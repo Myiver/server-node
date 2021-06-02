@@ -56,7 +56,7 @@ class AuthController {
       institution.__V = undefined
 
       const token = jwt.sign({ _id: institution._id }, process.env.JWT_SECRET, {
-        expiresIn: "30 days"
+        expiresIn: "30d"
       })
 
       return res.json({ institution, token })
@@ -70,7 +70,7 @@ class AuthController {
     try {
       const institution = await InstitutionModel.findOne({ _id: req.institution._id })
       const token = jwt.sign({ _id: institution._id }, process.env.JWT_SECRET, {
-        expiresIn: "30 days"
+        expiresIn: "30d"
       })
 
       // Remove password and __v fields from response object
