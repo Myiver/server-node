@@ -3,8 +3,8 @@ import Joi from "@hapi/joi"
 export const validateRegister = (req, res, next) => {
   try {
     const schema = Joi.object({
-      name: Joi.string().max(64).required(),
-      login: Joi.string().max(64).required(),
+      name: Joi.string().min(4).max(64).required(),
+      login: Joi.string().min(4).max(64).required(),
       password: Joi.string().min(6).max(64).required()
     })
 
@@ -23,7 +23,7 @@ export const validateRegister = (req, res, next) => {
 export const validateLogin = (req, res, next) => {
   try {
     const schema = Joi.object({
-      login: Joi.string().max(64).required(),
+      login: Joi.string().min(4).max(64).required(),
       password: Joi.string().min(6).max(64).required()
     })
 
