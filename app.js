@@ -1,6 +1,5 @@
 import createError from "http-errors"
 import express from "express"
-import path from "path"
 import cookieParser from "cookie-parser"
 import logger from "morgan"
 import cors from "cors"
@@ -35,10 +34,12 @@ app.use(logger("dev"))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
-app.use(express.static(path.join(__dirname, "public")))
 
-// Handle Routes
+
+// Routes
 app.use("/api/auth", routers.AuthRouter)
+app.use("/api/subjects", routers.SubjectRouter)
+app.use("/api/teachers", routers.TeacherRouter)
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

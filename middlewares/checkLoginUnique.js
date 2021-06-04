@@ -2,10 +2,10 @@ import { InstitutionModel } from "../models"
 
 const checkLoginUnique = async (req, res, next) => {
   try {
-    const { login } = req.body
-    const lowerLogin = login.toLowerCase()
+    let { login } = req.body
+    login = login.toLowerCase()
 
-    const institution = await InstitutionModel.findOne({ login: lowerLogin })
+    const institution = await InstitutionModel.findOne({ login })
 
     if (institution) {
       return res.json({ error: `"${login}" մուտքանունն արդեն զբաղված է` })
