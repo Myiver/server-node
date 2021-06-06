@@ -38,9 +38,7 @@ class TeacherController {
 
     const teachers = await TeacherModel
       .find({ institution: _id })
-      .populate("subjects")
-      .select({ __v: 0, institution: 0 })
-      .lean()
+      .select({ firstName: 1, lastName: 1, patronymic: 1 })
 
     res.json({ teachers })
   }
