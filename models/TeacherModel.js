@@ -11,7 +11,7 @@ const TeacherSchema = new Schema({
   },
   patronymic: {
     type: String,
-    default: ""
+    default: "֊"
   },
   institution: { type: Schema.Types.ObjectId, ref: "institutions" },
   subjects: [{ type: Schema.Types.ObjectId, ref: "subjects" }]
