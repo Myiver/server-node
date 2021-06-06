@@ -15,4 +15,6 @@ const InstitutionSchema = new Schema({
   }
 })
 
-export const InstitutionModel = model("institutions", InstitutionSchema)
+const InstitutionModel = model("institutions", InstitutionSchema)
+
+export { InstitutionModel }

@@ -1,3 +1,3 @@
-export { router as AuthRouter } from "./AuthRouter"
-export { router as SubjectRouter } from "./SubjectRouter"
-export { router as TeacherRouter } from "./TeacherRouter"
+export { router as Auth } from "./Auth"
+export { router as Subject } from "./Subject"
+export { router as Teacher } from "./Teacher"

@@ -1,3 +1,2 @@
-export { checkLoginUnique } from "./checkLoginUnique"
-export { verifyToken } from "./verifyToken"
-export { validateRegister, validateLogin } from "./validate"
+export { Auth } from "./Auth.middleware"
+export { Validate } from "./Valdate.middleware"

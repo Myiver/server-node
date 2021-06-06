@@ -11,4 +11,6 @@ const SubjectSchema = new Schema({
   }
 })
 
-export const SubjectModel = model("subjects", SubjectSchema)
+const SubjectModel = model("subjects", SubjectSchema)
+
+export { SubjectModel }

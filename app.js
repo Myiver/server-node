@@ -35,11 +35,10 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 
-
 // Routes
-app.use("/api/auth", routers.AuthRouter)
-app.use("/api/subjects", routers.SubjectRouter)
-app.use("/api/teachers", routers.TeacherRouter)
+app.use("/api/auth", routers.Auth)
+app.use("/api/subjects", routers.Subject)
+app.use("/api/teachers", routers.Teacher)
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
