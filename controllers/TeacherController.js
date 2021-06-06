@@ -1,6 +1,7 @@
 import { TeacherModel } from "../models"
 
 class TeacherController {
+  /* Create a new teacher */
   static async create(req, res) {
     const { firstName, lastName, patronymic, subjects, institutionId } = req.body
     const newTeacher = new TeacherModel({
@@ -29,6 +30,19 @@ class TeacherController {
 
     res.json({ teacher: savedTeacher })
 
+  }
+
+  /* Get teachers list for an institution */
+  static async getList(req, res) {
+    const { _id } = req.body
+
+    const teachers = await TeacherModel
+      .find({ institution: _id })
+      .populate("subjects")
+      .select({ __v: 0, institution: 0 })
+      .lean()
+
+    res.json({ teachers })
   }
 }
 
