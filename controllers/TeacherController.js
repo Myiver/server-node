@@ -16,7 +16,7 @@ class TeacherController {
 
     savedTeacher.__v = undefined
 
-    res.json({ teacher: savedTeacher })
+    return res.json({ teacher: savedTeacher })
   }
 
   /* Get teachers list for an institution */
@@ -29,7 +29,7 @@ class TeacherController {
       patronymic: 1
     })
 
-    res.json({ teachers })
+    return res.json({ teachers })
   }
 }
 
