@@ -24,14 +24,14 @@ class SubjectController {
     try {
       const id = req.params.id
 
-      const subject = await SubjectModel.findById(id)
+      const subject = await SubjectModel.findById(id).select({ __v: 0 })
 
-      if (subject) {
-        subject.__v = undefined
-        return res.json({ subject })
+      if (subject === null) {
+        return res.json({ error: "Գտնված չէ" })
       }
 
-      return res.json({ error: "Գտնված չէ" })
+      return res.json({ subject })
+
     } catch ({ message }) {
       return res.json({ error: message })
     }
