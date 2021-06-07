@@ -27,7 +27,7 @@ class TeacherController {
       firstName: 1,
       lastName: 1,
       patronymic: 1
-    })
+    }).lean()
 
     return res.json({ teachers })
   }

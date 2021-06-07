@@ -38,7 +38,7 @@ class AuthController {
       const { login, password } = req.body
       const lowerLogin = login.toLowerCase()
 
-      const institution = await InstitutionModel.findOne({ login: lowerLogin })
+      const institution = await InstitutionModel.findOne({ login: lowerLogin }).lean()
 
       if (institution === null) {
         return res.json({ error: "Սխալ մուտքանուն կամ գաղտնաբառ" })
@@ -68,7 +68,7 @@ class AuthController {
   /* Verify token */
   static async getVerifiedInstitution(req, res) {
     try {
-      const institution = await InstitutionModel.findOne({ _id: req.institution._id })
+      const institution = await InstitutionModel.findOne({ _id: req.institution._id }).lean()
       const token = jwt.sign({ _id: institution._id }, process.env.JWT_SECRET, {
         expiresIn: "30d"
       })

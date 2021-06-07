@@ -24,7 +24,7 @@ class SubjectController {
     try {
       const id = req.params.id
 
-      const subject = await SubjectModel.findById(id).select({ __v: 0 })
+      const subject = await SubjectModel.findById(id).select({ __v: 0 }).lean()
 
       if (subject === null) {
         return res.json({ error: "Գտնված չէ" })
@@ -40,7 +40,7 @@ class SubjectController {
   /* Get all subjects */
   static async getAll(req, res) {
     try {
-      const subjects = await SubjectModel.find({}).select({ __v: 0 })
+      const subjects = await SubjectModel.find({}).select({ __v: 0 }).lean()
 
       res.json({ subjects })
     } catch ({ message }) {
