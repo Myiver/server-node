@@ -31,6 +31,23 @@ class TeacherController {
 
     return res.json({ teachers })
   }
+
+  /* Get one teacher object by id */
+  static async getOne(req, res) {
+    try {
+      const { id } = req.params
+
+      const teacher = await TeacherModel
+        .findById(id)
+        .populate("subjects")
+        .select({ institution: 0, __v: 0 })
+        .lean()
+
+      res.json({ teacher })
+    } catch ({ message }) {
+      res.json({ error: message })
+    }
+  }
 }
 
 export { TeacherController }
