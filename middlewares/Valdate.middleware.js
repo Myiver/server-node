@@ -6,7 +6,7 @@ class Validate {
       const schema = Joi.object({
         name: Joi.string().min(4).max(64).required(),
         login: Joi.string().min(4).max(64).required(),
-        password: Joi.string().min(6).max(64).required()
+        password: Joi.string().min(6).max(64).required(),
       })
 
       const { error } = schema.validate(req.body)
@@ -45,8 +45,9 @@ class Validate {
       const schema = Joi.object({
         firstName: Joi.string().min(2).max(64).required(),
         lastName: Joi.string().min(2).max(64).required(),
-        patronymic: Joi.string().valid("").optional(),
-        subjects: Joi.array().min(1).required()
+        patronymic: Joi.string().valid(""),
+        subjects: Joi.array().min(1).required(),
+        institutionId: Joi.string().min(0).max(64)
       })
 
       const { error } = schema.validate(req.body)

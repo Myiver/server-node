@@ -3,33 +3,44 @@ import { TeacherModel } from "../models"
 class TeacherController {
   /* Create a new teacher */
   static async create(req, res) {
-    const { firstName, lastName, patronymic, subjects, institutionId } = req.body
-    const newTeacher = new TeacherModel({
-      firstName,
-      lastName,
-      patronymic,
-      institution: institutionId,
-      subjects
-    })
+    try {
+      const { firstName, lastName, patronymic, subjects, institutionId } = req.body
 
-    const savedTeacher = await newTeacher.save()
+      const newTeacher = new TeacherModel({
+        firstName,
+        lastName,
+        patronymic,
+        institution: institutionId,
+        subjects
+      })
 
-    savedTeacher.__v = undefined
+      console.log(institutionId)
 
-    return res.json({ teacher: savedTeacher })
+      const savedTeacher = await newTeacher.save()
+
+      savedTeacher.__v = undefined
+
+      return res.json({ teacher: savedTeacher })
+    } catch ({ message }) {
+      return res.json({ error: message })
+    }
   }
 
   /* Get teachers list for an institution */
   static async getList(req, res) {
-    const { _id } = req.body
+    try {
+      const { _id } = req.body
 
-    const teachers = await TeacherModel.find({ institution: _id }).select({
-      firstName: 1,
-      lastName: 1,
-      patronymic: 1
-    }).lean()
+      const teachers = await TeacherModel.find({ institution: _id }).select({
+        firstName: 1,
+        lastName: 1,
+        patronymic: 1
+      }).lean()
 
-    return res.json({ teachers })
+      return res.json({ teachers })
+    } catch ({ message }) {
+      return res.json({ error: message })
+    }
   }
 
   /* Get one teacher object by id */
