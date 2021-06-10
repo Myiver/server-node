@@ -43,9 +43,22 @@ class TeacherController {
         .select({ institution: 0, __v: 0 })
         .lean()
 
-      res.json({ teacher })
+      return res.json({ teacher })
     } catch ({ message }) {
-      res.json({ error: message })
+      return res.json({ error: message })
+    }
+  }
+
+  /* Edit teacher */
+  static async edit(req, res) {
+    try {
+      const { _id, firstName, lastName, patronymic, subjects } = req.body
+
+      await TeacherModel.findOneAndUpdate({ _id }, { firstName, lastName, patronymic, subjects }, { new: true })
+
+      return res.end()
+    } catch ({ message }) {
+      return res.json({ error: message })
     }
   }
 }

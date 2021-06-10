@@ -14,4 +14,7 @@ router.post("/get-list", TeacherController.getList)
 /* GET get one teacher object by id */
 router.get("/get-one/:id", TeacherController.getOne)
 
+/* PUT edit an existing teacher */
+router.put("/edit", TeacherController.edit)
+
 export { router }
