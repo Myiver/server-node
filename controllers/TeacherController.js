@@ -72,6 +72,19 @@ class TeacherController {
       return res.json({ error: message })
     }
   }
+
+  /* Delete teacher */
+  static async delete(req, res) {
+    try {
+      const { id } = req.params
+
+      await TeacherModel.deleteOne({ _id: id })
+
+      return res.json({ message: "deleted" })
+    } catch ({ message }) {
+      return res.json({ error: message })
+    }
+  }
 }
 
 export { TeacherController }

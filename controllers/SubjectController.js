@@ -40,7 +40,7 @@ class SubjectController {
   /* Get all subjects */
   static async getAll(req, res) {
     try {
-      const subjects = await SubjectModel.find({}).select({ __v: 0 }).lean()
+      const subjects = await SubjectModel.find({}).select({ __v: 0, value: 0 }).lean()
 
       res.json({ subjects })
     } catch ({ message }) {

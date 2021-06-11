@@ -17,4 +17,7 @@ router.get("/get-one/:id", TeacherController.getOne)
 /* PUT edit an existing teacher */
 router.put("/edit", TeacherController.edit)
 
+/* DELETE and existing teacher */
+router.delete("/delete/:id", TeacherController.delete)
+
 export { router }
