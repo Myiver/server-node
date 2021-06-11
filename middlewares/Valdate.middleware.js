@@ -45,7 +45,7 @@ class Validate {
       const schema = Joi.object({
         firstName: Joi.string().min(2).max(64).required(),
         lastName: Joi.string().min(2).max(64).required(),
-        patronymic: Joi.string().valid(""),
+        patronymic: Joi.string().pattern(new RegExp(".*")),
         subjects: Joi.array().min(1).required(),
         institutionId: Joi.string().min(0).max(64)
       })

@@ -3,15 +3,18 @@ import { Schema, model } from "mongoose"
 const TeacherSchema = new Schema({
   firstName: {
     type: String,
-    required: true
+    required: true,
+    trim: true,
   },
   lastName: {
     type: String,
-    required: true
+    required: true,
+    trim: true
   },
   patronymic: {
     type: String,
-    default: ""
+    default: " ",
+    trim: true
   },
   institution: { type: Schema.Types.ObjectId, ref: "institutions" },
   subjects: [{ type: Schema.Types.ObjectId, ref: "subjects" }]
