@@ -80,7 +80,7 @@ class TeacherController {
 
       await TeacherModel.deleteOne({ _id: id })
 
-      return res.json({ message: "deleted" })
+      return res.end()
     } catch ({ message }) {
       return res.json({ error: message })
     }

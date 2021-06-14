@@ -39,6 +39,7 @@ app.use(cookieParser())
 app.use("/api/auth", routers.Auth)
 app.use("/api/subjects", routers.Subject)
 app.use("/api/teachers", routers.Teacher)
+app.use("/api/groups", routers.Group)
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

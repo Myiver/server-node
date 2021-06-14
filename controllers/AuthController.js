@@ -53,7 +53,7 @@ class AuthController {
 
       // Remove password and __v fields from response object
       institution.password = undefined
-      institution.__V = undefined
+      institution.__v = undefined
 
       const token = jwt.sign({ _id: institution._id }, process.env.JWT_SECRET, {
         expiresIn: "30d"
