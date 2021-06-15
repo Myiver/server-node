@@ -11,6 +11,9 @@ router.post("/new", Validate.newTeacher, TeacherController.create)
 /* POST get teachers list by institution _id */
 router.post("/get-list", TeacherController.getList)
 
+/* POST get teachers list for creating a new group by institution _id */
+router.post("/get-list-for-new-group", TeacherController.getListForNewGroup)
+
 /* GET get one teacher object by id */
 router.get("/get-one/:id", TeacherController.getOne)
 

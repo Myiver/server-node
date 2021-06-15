@@ -43,6 +43,23 @@ class TeacherController {
     }
   }
 
+  /* Get teachers list for creating a new group */
+  static async getListForNewGroup(req, res) {
+    try {
+      const { _id } = req.body
+
+      const teachers = await TeacherModel.find({ institution: _id }).select({
+        firstName: 1,
+        lastName: 1,
+        subjects: 1
+      }).lean()
+
+      return res.json({ teachers })
+    } catch ({ message }) {
+      return res.json({ error: message })
+    }
+  }
+
   /* Get one teacher object by id */
   static async getOne(req, res) {
     try {
